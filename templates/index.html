@@ -1,24 +1,15 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panamericanos Santiago</title>
-    <link rel="stylesheet" href="./style/index.css">
-</head>
-<body>
-    <header>
-        <h1>Juegos Panamericanos Chile 2023</h1>
-        <div class="Menu">
-            <a href="./index.html">Inicio</a>
-            <a href="./agregar-hincha.html">Registrar Hincha</a>
-            <a href="./agregar-artesano.html">Registrar Artesano</a>
-            <a href="./ver-hinchas.html">Ver Hinchas</a>
-            <a href="./ver-artesanos.html">Ver Artesanos</a>
-        </div>
-    </header>
+{% extends 'base.html' %}
+{% block title %}
+Panamericanos Santiago
+{% endblock %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
+{% endblock %}
+{% block content %}
     <div class="hero">
-        <img src="./resources/img/portada.png" alt="portada de los juegos panamericanos">
+        {% block img%}
+        <img src="{{url_for('static', filename='img/portada.png')}}" alt="portada de los juegos panamericanos">
+        {% endblock %}
     </div>
     <div class="secciones">
         <div class="sec1">
@@ -34,10 +25,4 @@
             <a href="./ver-artesanos.html">Ver Artesanos</a>
         </div>
     </div>
-    <footer>
-        <p>
-            <small>Pagina desarrollada por Daniel Radrigan para el curso de Desarrollo de Aplicaciones WEB</small>
-        </p>
-    </footer>
-</body>
-</html>
+{% endblock %}

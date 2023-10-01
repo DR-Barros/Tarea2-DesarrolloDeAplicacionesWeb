@@ -1,37 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informacion Artesano</title>
-    <link rel="stylesheet" href="./style/informacion-artesano.css">
-</head>
-<body>
-    <header>
-        <h1>Juegos Panamericanos Chile 2023</h1>
-        <a href="./index.html">Inicio</a>
-        <a href="./agregar-hincha.html">Registrar Hincha</a>
-        <a href="./agregar-artesano.html">Registrar Artesano</a>
-        <a href="./ver-hinchas.html">Ver Hinchas</a>
-        <a href="./ver-artesanos.html">Ver Artesanos</a>
-    </header>
-    <div class="container">
-        <h2>Artesano:</h2>
-        <p>Nombre: <span id="nombre"></span></p>
-        <p>Región: <span id="region"></span></p>
-        <p>Comuna: <span id="comuna"></span></p>
-        <p>Email de contacto: <span id="mail"></span></p>
-        <p>Telefono de contacto: <span id="phone"></span></p>
-        <p>Tipo de artesanía: <span id="tipo"></span></p>
-        <p>Descripción: <span id="descripcion"></span></p>
-        <div id="fotos"></div>
-        <a class="boton" href="./ver-artesanos.html">Volver a ver Artesanos</a>
-    </div>
-    <footer>
-        <p>
-            <small>Pagina desarrollada por Daniel Radrigan para el curso de Desarrollo de Aplicaciones WEB</small>
-        </p>
-    </footer>
-    <script src="./funciones/informacion-artesano.js"></script>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}
+    Informacion Artesano
+{% endblock %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/informacion-artesano.css')}}">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h2>Artesano:</h2>
+    <p>Nombre: <span id="nombre"></span></p>
+    <p>Región: <span id="region"></span></p>
+    <p>Comuna: <span id="comuna"></span></p>
+    <p>Email de contacto: <span id="mail"></span></p>
+    <p>Telefono de contacto: <span id="phone"></span></p>
+    <p>Tipo de artesanía: <span id="tipo"></span></p>
+    <p>Descripción: <span id="descripcion"></span></p>
+    <div id="fotos"></div>
+    <a class="boton" href="./ver-artesanos.html">Volver a ver Artesanos</a>
+</div>
+{% endblock %}
+{% block js %}
+    <script src="{{url_for('static', filename='js/informacion-artesano.js')}}"></script>
+{% endblock %}
