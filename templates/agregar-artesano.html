@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Artesano</title>
+    <link rel="stylesheet" href="./style/agregar-artesano.css">
+</head>
+<body>
+    <header>
+        <h1>Juegos Panamericanos Chile 2023</h1>
+        <a href="./index.html">Inicio</a>
+        <a href="./agregar-hincha.html">Registrar Hincha</a>
+        <a href="./agregar-artesano.html">Registrar Artesano</a>
+        <a href="./ver-hinchas.html">Ver Hinchas</a>
+        <a href="./ver-artesanos.html">Ver Artesanos</a>
+    </header>
+    <div class="container">
+        <h2>Inscribete para vender tus artesanias</h2>
+        <form id="formulario">
+            <div class="region">
+                <label for="region">Seleccione su región de procedencia: <span id="region-span"></span></label>
+                <select name="region" id="region">
+                    <option value="">-Elija una de las siguientes comunas-</option>
+                    <option value="Tarapacá">I Región: Arica y Parinacota</option>
+                    <option value="Antofagasta">II Región</option>
+                    <option value="Atacama">III Región</option>
+                    <option value="Coquimbo">IV Región</option>
+                    <option value="Valparaíso">V Región</option>
+                    <option value="Región del Libertador Gral. Bernardo O’Higgins">VI Región</option>
+                    <option value="Región del Maule">VII Región</option>
+                    <option value="Región del Biobío">VIII Región</option>
+                    <option value="Región de la Araucanía">IX Región</option>
+                    <option value="Región de Los Lagos">X Región</option>
+                    <option value="Región Aisén del Gral. Carlos Ibáñez del Campo">XI Región</option>
+                    <option value="Región Metropolitana de Santiago">Región Metropolitana</option>
+                    <option value="Región de Magallanes y de la Antártica Chilena">XII Región</option>
+                    <option value="Región de Los Ríos">XIV Región</option>
+                    <option value="Arica y Parinacota">XV Región</option>
+                    <option value="Región de Ñuble">XVI Región</option>
+                </select>
+            </div>
+            <div class="comuna">
+                <label for="comuna">Seleccione su comuna <span id="comuna-span"></span></label>
+                <select name="comuna" id="comuna" disabled="disabled">
+                    <option value="">Elija primero la region</option>
+                </select>
+            </div>
+            <div class="artesanias">
+                <fieldset>
+                    <legend>Seleccione el tipo de sus artesanias (seleccione máximo 3): <span id="artesania-span"></span></legend>
+                    <input type="checkbox" name="artesania" id="mármol" value="mármol">
+                    <label for="mármol">mármol</label>
+                    <input type="checkbox" name="artesania" id="madera" value="madera">
+                    <label for="madera">madera</label>
+                    <input type="checkbox" name="artesania" id="cerámica" value="cerámica">
+                    <label for="cerámica">cerámica</label>
+                    <input type="checkbox" name="artesania" id="mimbre" value="mimbre">
+                    <label for="mimbre">mimbre</label>
+                    <input type="checkbox" name="artesania" id="metal" value="metal">
+                    <label for="metal">metal</label>
+                    <input type="checkbox" name="artesania" id="cuero" value="cuero">
+                    <label for="cuero">cuero</label>
+                    <input type="checkbox" name="artesania" id="telas" value="telas">
+                    <label for="telas">telas</label>
+                    <input type="checkbox" name="artesania" id="joyas" value="joyas">
+                    <label for="joyas">joyas</label>
+                    <input type="checkbox" name="artesania" id="otros" value="otros">
+                    <label for="otros">otros</label>
+                </fieldset>
+            </div>
+            <div class="descripcion">
+                <label for="descripcion">Describas sus artesanias <span id="desc-span"></span></label>
+                <textarea name="descripcion" id="descripcion" cols="50" rows="4"></textarea>
+            </div>
+            <div class="fotos">
+                <label for="photo">Seleccione fotos para de sus artesanias <span id="fotos-span"></span></label>
+                <input name="photo" id="photo" type="file" accept="image/png, image/jpeg">
+                <div id="foto2"></div>
+                <div id="foto3"></div>
+            </div>
+            <div class="nombre">
+                <label for="name">Ingrese su nombre: <span id="name-span"></span></label>
+                <input type="text" name="name" id="name" autocomplete="name" maxlength="80">
+            </div>
+            <div class="email">
+                <label for="mail">Ingrese su correo electronico: <span id="mail-span"></span></label>
+                <input type="email" name="mail" id="mail" autocomplete="email" maxlength="30">
+            </div>
+            <div class="telefono">
+                <label for="phone">Ingrese un celular de contacto <span id="phone-span"></span></label>
+                <input type="tel" name="phone" id="phone" autocomplete="mobile" maxlength="15">
+            </div>
+
+            <button class="boton" id="Registrar-Artesano">Registrarse</button>
+        </form>
+        <span id="msg"></span>
+    </div>
+    <footer>
+        <p>
+            <small>Pagina desarrollada por Daniel Radrigan para el curso de Desarrollo de Aplicaciones WEB</small>
+        </p>
+    </footer>
+    <script src="./funciones/agregar-artesano.js"></script>
+</body>
+</html>
