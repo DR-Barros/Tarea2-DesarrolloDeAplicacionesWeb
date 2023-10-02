@@ -40,24 +40,10 @@
         <div class="artesanias">
             <fieldset>
                 <legend>Seleccione el tipo de sus artesanias (seleccione máximo 3): <span id="artesania-span"></span></legend>
-                <input type="checkbox" name="artesania" id="mármol" value="mármol">
-                <label for="mármol">mármol</label>
-                <input type="checkbox" name="artesania" id="madera" value="madera">
-                <label for="madera">madera</label>
-                <input type="checkbox" name="artesania" id="cerámica" value="cerámica">
-                <label for="cerámica">cerámica</label>
-                <input type="checkbox" name="artesania" id="mimbre" value="mimbre">
-                <label for="mimbre">mimbre</label>
-                <input type="checkbox" name="artesania" id="metal" value="metal">
-                <label for="metal">metal</label>
-                <input type="checkbox" name="artesania" id="cuero" value="cuero">
-                <label for="cuero">cuero</label>
-                <input type="checkbox" name="artesania" id="telas" value="telas">
-                <label for="telas">telas</label>
-                <input type="checkbox" name="artesania" id="joyas" value="joyas">
-                <label for="joyas">joyas</label>
-                <input type="checkbox" name="artesania" id="otros" value="otros">
-                <label for="otros">otros</label>
+                {% for t in tipos %}
+                <input type="checkbox" name="artesania" id="{{t[0]}}" value="{{t[0]}}">
+                <label for="{{t[0]}}">{{ t[0] }}</label>
+                {% endfor %}
             </fieldset>
         </div>
         <div class="descripcion">

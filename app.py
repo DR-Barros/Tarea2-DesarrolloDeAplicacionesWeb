@@ -1,7 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+from db import db
 
 app = Flask(__name__)
 
+conn = db.getConection()
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -12,7 +14,11 @@ def agregarHincha():
 
 @app.route('/agregar-artesano')
 def agregarArtesano():
-    return render_template('agregar-artesano.html')
+    if request.method == 'POST':
+        pass
+    elif request.method == 'GET':
+        tiposArtesania = db.getTipoArtesania(conn)
+        return render_template('agregar-artesano.html', tipos = tiposArtesania)
 
 @app.route('/informacion-hincha')
 def informacionHincha():
