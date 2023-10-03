@@ -21,7 +21,9 @@ def agregarHincha():
 @app.route('/agregar-artesano')
 def agregarArtesano():
     tiposArtesania = db.getTipoArtesania(conn)
-    return render_template('agregar-artesano.html', tipos = tiposArtesania)
+    region = db.getRegion(conn)
+    comuna = db.getComuna(conn)
+    return render_template('agregar-artesano.html', tipos = tiposArtesania, regiones = region, comunas = comuna)
 
 @app.route('/informacion-hincha')
 def informacionHincha():

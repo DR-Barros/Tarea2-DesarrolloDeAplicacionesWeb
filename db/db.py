@@ -29,16 +29,16 @@ def getRegion(conn):
     region = cursor.fetchall()
     return region
 
-#devuelve un array con (comuna, región_id)
+#devuelve un array con (nombre, región_id, comuna_id)
 def getComuna(conn):
-    sql = "SELECT nombre, region_id FROM comuna"
+    sql = "SELECT * FROM comuna"
     cursor = conn.cursor()
     cursor.execute(sql)
     comuna = cursor.fetchall()
     return comuna
 
 def addArtesano(conn, comuna, descripcion, nombre, email, celular):
-    sql = "INSERT INTO artesano (comuna_id, descripcion_artesania, nombre, email, celular) VALUES (?,?,?,?,?)"
+    sql = "INSERT INTO artesano (comuna_id, descripcion_artesania, nombre, email, celular) VALUES (%s,%s,%s,%s,%s)"
     cursor = conn.cursor()
     cursor.execute(sql, (comuna, descripcion, nombre, email, celular))
     conn.commit()

@@ -8,33 +8,23 @@
 {% block content %}
 <div class="container">
     <h2>Inscribete para vender tus artesanias</h2>
-    <form id="formulario" action="/post-artesanos", method="post">
+    <form id="formulario" action="/post-artesanos", method="post" enctype="multipart/form-data">
         <div class="region form">
             <label for="region">Seleccione su región de procedencia: <span id="region-span"></span></label>
             <select name="region" id="region">
-                <option value="">-Elija una de las siguientes comunas-</option>
-                <option value="Tarapacá">I Región: Arica y Parinacota</option>
-                <option value="Antofagasta">II Región</option>
-                <option value="Atacama">III Región</option>
-                <option value="Coquimbo">IV Región</option>
-                <option value="Valparaíso">V Región</option>
-                <option value="Región del Libertador Gral. Bernardo O’Higgins">VI Región</option>
-                <option value="Región del Maule">VII Región</option>
-                <option value="Región del Biobío">VIII Región</option>
-                <option value="Región de la Araucanía">IX Región</option>
-                <option value="Región de Los Lagos">X Región</option>
-                <option value="Región Aisén del Gral. Carlos Ibáñez del Campo">XI Región</option>
-                <option value="Región Metropolitana de Santiago">Región Metropolitana</option>
-                <option value="Región de Magallanes y de la Antártica Chilena">XII Región</option>
-                <option value="Región de Los Ríos">XIV Región</option>
-                <option value="Arica y Parinacota">XV Región</option>
-                <option value="Región de Ñuble">XVI Región</option>
+                <option value="">Elija una de las siguientes regiones</option>
+                {% for region in regiones %}
+                <option value="{{region[0]}}">{{region[1]}}</option>
+                {% endfor %}
             </select>
         </div>
         <div class="comuna form">
             <label for="comuna">Seleccione su comuna <span id="comuna-span"></span></label>
             <select name="comuna" id="comuna" disabled="disabled">
                 <option value="">Elija primero la region</option>
+                {% for comuna in comunas %}
+                <option class="{{comuna[2]}}" value="{{comuna[0]}}">{{comuna[1]}}</option>
+                {% endfor %}
             </select>
         </div>
         <div class="artesanias form">
