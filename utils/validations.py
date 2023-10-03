@@ -4,20 +4,18 @@ import re
 
 #devuelve true si es valido y los errores si no lo es
 def validarArtesano(region, comuna, artesanias, photo, photo2, photo3, nombre, email, telefono, conn):
-    #validar región
-    reg = validarRegion(region, conn)
-    if reg == -1:
+    if int(region) < 1 or int(region) > 16:
         print("region invalido")
         return False
     #validar Comuna
     com = validarComuna(comuna, conn)
-    if com == -1 or reg != com:
+    print(com)
+    if com == -1 or int(region) != com:
         print("comuna invalido")
         return False
     #validar tipos
-    posibleType = db.getTipoArtesania(conn)
-    for tipo in artesanias:
-        if tipo not in posibleType:
+    for t in artesanias:
+        if int(t) < 1 or int(t) > 9:
             print("tipo invalido")
             return False
 
@@ -59,21 +57,12 @@ def validarArtesano(region, comuna, artesanias, photo, photo2, photo3, nombre, e
 
 
 
-
-#devuelve el id de la region, devuelve -1 si no la encuentra
-def validarRegion(region, conn):
-    posibleRegion =db.getRegion(conn)
-    for reg in posibleRegion:
-        if reg[1] == region:
-            return reg[0]
-    return -1 
-
 #devuelve el id de la region, devuelve -1 si no la encuentra
 def validarComuna(comuna, conn):
     possibleComuna = db.getComuna(conn)
     for com in possibleComuna:
-        if com[0] == comuna:
-            return com[1]
+        if com[0] == int(comuna):
+            return com[2]
     return -1 
 
 def validarImg(conf_img):

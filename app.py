@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from db import db
 from utils.validations import *
+from werkzeug.utils import secure_filename
 import hashlib
 import filetype
 import os
@@ -8,6 +9,8 @@ import os
 UPLOAD_FOLDER = 'static/uploads'
 
 app = Flask(__name__)
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 conn = db.getConection()
 @app.route('/')

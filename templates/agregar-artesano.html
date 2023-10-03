@@ -31,8 +31,8 @@
             <fieldset>
                 <legend>Seleccione el tipo de sus artesanias (seleccione máximo 3): <span id="artesania-span"></span></legend>
                 {% for t in tipos %}
-                <input type="checkbox" name="artesania" id="{{t}}" value="{{t}}">
-                <label for="{{t}}">{{ t }}</label>
+                <input type="checkbox" name="artesania" id="{{t[1]}}" value="{{t[0]}}">
+                <label for="{{t[1]}}">{{ t[1] }}</label>
                 {% endfor %}
             </fieldset>
         </div>
