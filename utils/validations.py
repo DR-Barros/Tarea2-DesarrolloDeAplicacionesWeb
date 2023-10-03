@@ -19,9 +19,8 @@ def validarArtesano(region, comuna, artesanias, photo, photo2, photo3, nombre, e
             return False
 
     #validar fotos
-    if photo != None and photo.filename != "" :
-        if not validarImg(photo):
-            return False
+    if not (validarImg(photo) and  photo2 != None and photo2.filename != ""):
+        return False
     
     if  photo2 != None and photo2.filename != "":
         if not validarImg(photo2):
@@ -37,12 +36,12 @@ def validarArtesano(region, comuna, artesanias, photo, photo2, photo3, nombre, e
         return False
      
     #mail
-    exprReg = r"/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/"
+    exprReg = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
     if not re.match(exprReg, email):
         return False
 
     #celular
-    exprReg = r"/^[+]?(56)?9\d{8}$/"
+    exprReg = r'^(\+569|9)\d{8}$'
     if not re.match(exprReg, telefono):
         return False
 
