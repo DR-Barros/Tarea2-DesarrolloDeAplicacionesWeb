@@ -42,7 +42,10 @@ def verHinchas():
 
 @app.route('/ver-artesanos')
 def verArtesanos():
-    return render_template('ver-artesanos.html')
+    artesano = db.getArtesanos(conn)
+    foto = db.getArtesanoFoto(conn)
+    tipo = db.getArtesanoTipo(conn)
+    return render_template('ver-artesanos.html', artesanos = artesano, fotos=foto, tipos = tipo)
 
 @app.route('/post-artesanos', methods=['POST'])
 def post_artesano():
@@ -76,7 +79,7 @@ def post_artesano():
                 # 2. save img as a file
                 photo.save(os.path.join(app.config["UPLOAD_FOLDER"], img_filename))
                 # subir link a la base dato
-                db.addArtesanoFoto(conn, img_filename, comuna, descripcion, nombre, email, telefono)
+                db.addArtesanoFoto(conn, app.config["UPLOAD_FOLDER"], img_filename, comuna, descripcion, nombre, email, telefono)
             if photo2 != None and photo2.filename != "" :
                 _filename = hashlib.sha256(
                     secure_filename(photo2.filename) # nombre del archivo
@@ -88,7 +91,7 @@ def post_artesano():
                 # 2. save img as a file
                 photo2.save(os.path.join(app.config["UPLOAD_FOLDER"], img2_filename))
                 # subir link a la base dato
-                db.addArtesanoFoto(conn, img2_filename, comuna, descripcion, nombre, email, telefono)
+                db.addArtesanoFoto(conn, app.config["UPLOAD_FOLDER"], img2_filename, comuna, descripcion, nombre, email, telefono)
             if photo3 != None and photo3.filename != "" :
                 _filename = hashlib.sha256(
                     secure_filename(photo3.filename) # nombre del archivo
@@ -100,7 +103,7 @@ def post_artesano():
                 # 2. save img as a file
                 photo3.save(os.path.join(app.config["UPLOAD_FOLDER"], img3_filename))
                 # subir link a la base dato
-                db.addArtesanoFoto(conn, img3_filename, comuna, descripcion, nombre, email, telefono)
+                db.addArtesanoFoto(conn, app.config["UPLOAD_FOLDER"], img3_filename, comuna, descripcion, nombre, email, telefono)
             
             return redirect(url_for("index"))
         else:

@@ -16,6 +16,22 @@
             <td>Tipo Artesanías</td>
             <td>Foto</td>
         </tr>
+        {% for artesano in artesanos %}
+        <tr>
+            <td>{{artesano[2]}}</td>
+            <td>{{artesano[3]}}</td>
+            <td>{{artesano[1]}}</td>
+            <td>
+                {% for tipo in tipos %}
+                {% if tipo[1] == artesano[0] %}
+                    <p>{{tipo[0]}}</p>
+                {% endif %}
+                {% endfor %}
+            </td>
+            <td>Foto</td>
+            <td>{{artesano}}</td>
+        </tr>
+        {% endfor %}
     </table>
     <a class="boton" href=".">Volver a Inicios</a>
 </div>
