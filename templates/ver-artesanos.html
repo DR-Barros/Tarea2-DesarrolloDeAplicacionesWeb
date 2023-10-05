@@ -17,7 +17,7 @@
             <td>Foto</td>
         </tr>
         {% for artesano in artesanos %}
-        <tr>
+        <tr id="{{artesano[0]}}">
             <td>{{artesano[2]}}</td>
             <td>{{artesano[3]}}</td>
             <td>{{artesano[1]}}</td>
@@ -28,8 +28,13 @@
                 {% endif %}
                 {% endfor %}
             </td>
-            <td>Foto</td>
-            <td>{{artesano}}</td>
+            <td>
+                {% for foto in fotos %}
+                {% if foto[0] == artesano[0] %}
+                    <img src="{{foto[1]+'/'+foto[2]}}" alt="">
+                {% endif %}
+                {% endfor %}
+            </td>
         </tr>
         {% endfor %}
     </table>

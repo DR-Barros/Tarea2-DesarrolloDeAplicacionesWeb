@@ -63,9 +63,10 @@ def post_artesano():
         if validarArtesano(region, comuna, artesania, photo, photo2, photo3, nombre, email, telefono, conn):
             #agregar artesano a la base de datos
             db.addArtesano(conn, comuna, descripcion, nombre, email, telefono)
+            artesano = db.getLastId(conn)[0][0]
             #agreagar el tipo del artesano
             for t in artesania:
-                db.addArtesanoTipo(conn, t, comuna, descripcion, nombre, email, telefono)
+                db.addArtesanoTipo(conn, t, artesano)
 
             #agregar las fotos si corresponde
             if photo != None and photo.filename != "" :
@@ -79,7 +80,7 @@ def post_artesano():
                 # 2. save img as a file
                 photo.save(os.path.join(app.config["UPLOAD_FOLDER"], img_filename))
                 # subir link a la base dato
-                db.addArtesanoFoto(conn, app.config["UPLOAD_FOLDER"], img_filename, comuna, descripcion, nombre, email, telefono)
+                db.addArtesanoFoto(conn, app.config["UPLOAD_FOLDER"], img_filename, artesano)
             if photo2 != None and photo2.filename != "" :
                 _filename = hashlib.sha256(
                     secure_filename(photo2.filename) # nombre del archivo
@@ -91,7 +92,7 @@ def post_artesano():
                 # 2. save img as a file
                 photo2.save(os.path.join(app.config["UPLOAD_FOLDER"], img2_filename))
                 # subir link a la base dato
-                db.addArtesanoFoto(conn, app.config["UPLOAD_FOLDER"], img2_filename, comuna, descripcion, nombre, email, telefono)
+                db.addArtesanoFoto(conn, app.config["UPLOAD_FOLDER"], img2_filename, artesano)
             if photo3 != None and photo3.filename != "" :
                 _filename = hashlib.sha256(
                     secure_filename(photo3.filename) # nombre del archivo
@@ -103,7 +104,7 @@ def post_artesano():
                 # 2. save img as a file
                 photo3.save(os.path.join(app.config["UPLOAD_FOLDER"], img3_filename))
                 # subir link a la base dato
-                db.addArtesanoFoto(conn, app.config["UPLOAD_FOLDER"], img3_filename, comuna, descripcion, nombre, email, telefono)
+                db.addArtesanoFoto(conn, app.config["UPLOAD_FOLDER"], img3_filename, artesano)
             
             return redirect(url_for("index"))
         else:

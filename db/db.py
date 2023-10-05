@@ -43,7 +43,7 @@ def getArtesanos(conn):
     return artesanos
 
 def getArtesanoFoto(conn):
-    sql = "SELECT ruta_archivo, nombre_archivo FROM foto, (SELECT id FROM artesano ORDER BY id DESC LIMIT 0, 5) a WHERE artesano_id = a.id "
+    sql = "SELECT a.id, ruta_archivo, nombre_archivo FROM foto, (SELECT id FROM artesano ORDER BY id DESC LIMIT 0, 5) a WHERE artesano_id = a.id "
     cursor = conn.cursor()
     cursor.execute(sql)
     fotos = cursor.fetchall()
@@ -56,6 +56,12 @@ def getArtesanoTipo(conn):
     tipos = cursor.fetchall()
     return tipos
 
+def getLastId(conn):
+    sql ="SELECT LAST_INSERT_ID()"
+    cursor = conn.cursor()
+    cursor.execute(sql)
+    id = cursor.fetchall()
+    return id
 
 def addArtesano(conn, comuna, descripcion, nombre, email, celular):
     sql = "INSERT INTO artesano (comuna_id, descripcion_artesania, nombre, email, celular) VALUES (%s,%s,%s,%s,%s)"
@@ -63,18 +69,14 @@ def addArtesano(conn, comuna, descripcion, nombre, email, celular):
     cursor.execute(sql, (comuna, descripcion, nombre, email, celular))
     conn.commit()
 
-def addArtesanoTipo(conn, tipo, comuna, descripcion, nombre, email, celular):
-    sqlArtesano = 'SELECT id FROM artesano WHERE comuna_id=%s AND descripcion_artesania=%s  AND nombre=%s AND email=%s  AND celular=%s'
+def addArtesanoTipo(conn, tipo, artesano):
     cursor = conn.cursor()
-    artesano = cursor.execute(sqlArtesano, (comuna, descripcion, nombre, email, celular))
     sql = "INSERT INTO artesano_tipo (artesano_id, tipo_artesania_id) VALUES (%s,%s)"
     cursor.execute(sql, (artesano, tipo))
     conn.commit()
 
-def addArtesanoFoto(conn, ruta, foto, comuna, descripcion, nombre, email, celular):
-    sqlArtesano = 'SELECT id FROM artesano WHERE comuna_id=%s AND descripcion_artesania=%s  AND nombre=%s AND email=%s  AND celular=%s'
+def addArtesanoFoto(conn, ruta, foto, artesano):
     cursor = conn.cursor()
-    artesano = cursor.execute(sqlArtesano, (comuna, descripcion, nombre, email, celular))
     sql = "INSERT INTO foto (ruta_archivo, nombre_archivo, artesano_id) VALUES (%s,%s,%s)"
     cursor.execute(sql, (ruta, foto, artesano))
     conn.commit()
