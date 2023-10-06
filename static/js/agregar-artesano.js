@@ -53,7 +53,7 @@ function changeFoto1(e){
         FOTO3.innerHTML ="";
         photo3 ="";
     } else {
-        FOTO2.innerHTML = "<input name='photo' id='photo2' type='file' accept='image/png, image/jpeg'></input>"
+        FOTO2.innerHTML = "<input name='photo2' id='photo2' type='file' accept='image/png, image/jpeg'></input>"
         photo2 = document.getElementById("photo2")
         photo2.addEventListener("change",(e) => changeFoto2(e));
     }
@@ -65,7 +65,7 @@ function changeFoto2(e){
         FOTO3.innerHTML ="";
         photo3 ="";
     } else {
-        FOTO3.innerHTML = "<input name='photo' id='photo3' type='file' accept='image/png, image/jpeg'></input>"
+        FOTO3.innerHTML = "<input name='photo3' id='photo3' type='file' accept='image/png, image/jpeg'></input>"
         photo3 = document.getElementById("photo3")
     }
 }
