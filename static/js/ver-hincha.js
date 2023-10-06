@@ -1,6 +1,6 @@
 let str = "<tr><td>Nombre</td><td>Comuna</td><td>Deportes</td><td>Modo Transporte</td><td>Numero celular</td></tr>"
 const LISTADOHINCHAS = document.getElementById("tabla");
-fetch("./datos/hinchas.json")
+fetch("./static/datos/hinchas.json")
 .then(response => response.json())
 .then(data => {
     data.hinchas.forEach(e =>{

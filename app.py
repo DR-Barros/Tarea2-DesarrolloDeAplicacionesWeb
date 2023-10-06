@@ -32,9 +32,9 @@ def agregarArtesano():
 def informacionHincha():
     return render_template('informacion-hincha.html')
 
-@app.route('/informacion-artesano')
-def informacionArtesano():
-    return render_template('informacion-artesano.html')
+@app.route('/informacion-artesano-<num>')
+def informacionArtesano(num):
+    return render_template('informacion-artesano.html', n = int(num))
 
 @app.route('/ver-hinchas')
 def verHinchas():
