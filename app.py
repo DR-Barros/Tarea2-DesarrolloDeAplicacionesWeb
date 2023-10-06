@@ -34,7 +34,11 @@ def informacionHincha():
 
 @app.route('/informacion-artesano-<num>')
 def informacionArtesano(num):
-    return render_template('informacion-artesano.html', n = int(num))
+    n = int(num)
+    informacion = db.getArtesanoById(conn, n)
+    foto = db.getArtesanoFotoById(conn, n)
+    tipo = db.getArtesanoTipoById(conn, n)
+    return render_template('informacion-artesano.html', artesano = informacion, fotos=foto, tipos = tipo)
 
 @app.route('/ver-hinchas')
 def verHinchas():

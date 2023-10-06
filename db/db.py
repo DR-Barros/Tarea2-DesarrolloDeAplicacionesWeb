@@ -56,6 +56,27 @@ def getArtesanoTipo(conn):
     tipos = cursor.fetchall()
     return tipos
 
+def getArtesanoById(conn, id):
+    sql = "SELECT a.nombre, r.nombre, c.nombre, email, celular, descripcion_artesania FROM artesano a, comuna c, region r WHERE a.id = %s AND a.comuna_id = c.id AND c.region_id = r.id"
+    cursor = conn.cursor()
+    cursor.execute(sql, (id))
+    artesano = cursor.fetchall()
+    return artesano[0]
+
+def getArtesanoTipoById(conn, id):
+    sql = "SELECT ta.nombre FROM tipo_artesania ta, artesano_tipo at WHERE at.artesano_id = %s AND  at.tipo_artesania_id = ta.id"
+    cursor = conn.cursor()
+    cursor.execute(sql, (id))
+    tipos = cursor.fetchall()
+    return tipos
+
+def getArtesanoFotoById(conn, id):
+    sql = "SELECT ruta_archivo, nombre_archivo FROM foto WHERE artesano_id = %s"
+    cursor = conn.cursor()
+    cursor.execute(sql, (id))
+    fotos = cursor.fetchall()
+    return fotos
+
 def getLastId(conn):
     sql ="SELECT LAST_INSERT_ID()"
     cursor = conn.cursor()
