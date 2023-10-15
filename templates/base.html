@@ -10,11 +10,11 @@
     <header>
         <h1>Juegos Panamericanos Chile 2023</h1>
         <div class="Menu">
-            <a href="./">Inicio</a>
-            <a href="./agregar-hincha">Registrar Hincha</a>
-            <a href="./agregar-artesano">Registrar Artesano</a>
-            <a href="./ver-hinchas">Ver Hinchas</a>
-            <a href="./ver-artesanos">Ver Artesanos</a>
+            <a href="{{url_for('index')}}">Inicio</a>
+            <a href="{{url_for('agregarHincha')}}">Registrar Hincha</a>
+            <a href="{{url_for('agregarArtesano')}}">Registrar Artesano</a>
+            <a href="{{url_for('verHinchas')}}">Ver Hinchas</a>
+            <a href="{{url_for('verArtesanos')}}">Ver Artesanos</a>
         </div>
     </header>
     {% block content %}{% endblock %}

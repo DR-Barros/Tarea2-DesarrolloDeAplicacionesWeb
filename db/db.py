@@ -34,25 +34,32 @@ def getComuna(conn):
     comuna = cursor.fetchall()
     return comuna
 
-#devuelve un array con los 
-def getArtesanos(conn):
-    sql = "SELECT a.id, c.nombre, a.nombre, celular FROM artesano a, comuna c WHERE a.comuna_id = c.id ORDER BY id DESC LIMIT 0, 5"
+
+def getCantArtesanos(conn):
+    sql = "SELECT count(*) FROM artesano"
     cursor = conn.cursor()
     cursor.execute(sql)
+    cant = cursor.fetchall()
+    return cant[0][0]
+
+def getArtesanos(conn, n):
+    sql = "SELECT a.id, c.nombre, a.nombre, celular FROM artesano a, comuna c WHERE a.comuna_id = c.id ORDER BY id DESC LIMIT %s, 5"
+    cursor = conn.cursor()
+    cursor.execute(sql, (n))
     artesanos = cursor.fetchall()
     return artesanos
 
-def getArtesanoFoto(conn):
-    sql = "SELECT a.id, ruta_archivo, nombre_archivo FROM foto, (SELECT id FROM artesano ORDER BY id DESC LIMIT 0, 5) a WHERE artesano_id = a.id "
+def getArtesanoFoto(conn, n):
+    sql = "SELECT a.id, ruta_archivo, nombre_archivo FROM foto, (SELECT id FROM artesano ORDER BY id DESC LIMIT %s, 5) a WHERE artesano_id = a.id "
     cursor = conn.cursor()
-    cursor.execute(sql)
+    cursor.execute(sql, (n))
     fotos = cursor.fetchall()
     return fotos
 
-def getArtesanoTipo(conn):
-    sql = "SELECT ta.nombre, a.id FROM tipo_artesania ta, artesano_tipo at, (SELECT id FROM artesano ORDER BY id DESC LIMIT 0, 5) a WHERE at.artesano_id = a.id AND  at.tipo_artesania_id = ta.id"
+def getArtesanoTipo(conn, n):
+    sql = "SELECT ta.nombre, a.id FROM tipo_artesania ta, artesano_tipo at, (SELECT id FROM artesano ORDER BY id DESC LIMIT %s, 5) a WHERE at.artesano_id = a.id AND  at.tipo_artesania_id = ta.id"
     cursor = conn.cursor()
-    cursor.execute(sql)
+    cursor.execute(sql, (n))
     tipos = cursor.fetchall()
     return tipos
 
@@ -61,6 +68,8 @@ def getArtesanoById(conn, id):
     cursor = conn.cursor()
     cursor.execute(sql, (id))
     artesano = cursor.fetchall()
+    if len(artesano) == 0:
+        return None
     return artesano[0]
 
 def getArtesanoTipoById(conn, id):

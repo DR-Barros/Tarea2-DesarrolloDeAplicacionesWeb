@@ -34,8 +34,13 @@ def informacionHincha():
 
 @app.route('/informacion-artesano-<num>')
 def informacionArtesano(num):
-    n = int(num)
+    try: 
+        n = int(num)
+    except:
+        return redirect("ver-artesanos")
     informacion = db.getArtesanoById(conn, n)
+    if informacion == None:
+        return redirect("ver-artesanos")
     foto = db.getArtesanoFotoById(conn, n)
     tipo = db.getArtesanoTipoById(conn, n)
     return render_template('informacion-artesano.html', artesano = informacion, fotos=foto, tipos = tipo)
@@ -46,10 +51,25 @@ def verHinchas():
 
 @app.route('/ver-artesanos')
 def verArtesanos():
-    artesano = db.getArtesanos(conn)
-    foto = db.getArtesanoFoto(conn)
-    tipo = db.getArtesanoTipo(conn)
-    return render_template('ver-artesanos.html', artesanos = artesano, fotos=foto, tipos = tipo)
+    artesano = db.getArtesanos(conn, 0)
+    foto = db.getArtesanoFoto(conn, 0)
+    tipo = db.getArtesanoTipo(conn, 0)
+    cant = db.getCantArtesanos(conn)
+    show = 5 < cant
+    return render_template('ver-artesanos.html', artesanos = artesano, fotos=foto, tipos = tipo, n=0, ant= 0, sig=1, mostrar = show)
+
+@app.route('/ver-artesanos<num>')
+def verArtesanos_param(num):
+    numero = 5*int(num)
+    num = int(num)
+    artesano = db.getArtesanos(conn, numero)
+    foto = db.getArtesanoFoto(conn, numero)
+    tipo = db.getArtesanoTipo(conn, numero)
+    cant = db.getCantArtesanos(conn)
+    print(cant)
+    show = numero+5 < cant
+    return render_template('ver-artesanos.html', artesanos = artesano, fotos=foto, tipos = tipo, n =num, ant=num-1, sig=num+1, mostrar = show)
+
 
 @app.route('/post-artesanos', methods=['POST'])
 def post_artesano():
